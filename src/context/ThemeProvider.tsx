@@ -1,5 +1,5 @@
-"use client"
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+"use client";
+import React, { createContext, useContext, useState, ReactNode, useLayoutEffect } from 'react';
 
 interface ThemeContextType {
   mode: string;
@@ -11,8 +11,21 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [mode, setMode] = useState<string>('light');
 
+  useLayoutEffect(() => {
+    const savedMode = localStorage.getItem('theme-mode');
+    if (savedMode) {
+      setMode(savedMode);
+      document.body.style.backgroundColor = savedMode === 'light' ? '#ffffff' : '#111827';
+    }
+  }, []);
+
+  const updateMode = (newMode: string) => {
+    setMode(newMode);
+    localStorage.setItem('theme-mode', newMode);
+  };
+
   return (
-    <ThemeContext.Provider value={{ mode, setMode }}>
+    <ThemeContext.Provider value={{ mode, setMode: updateMode }}>
       {children}
     </ThemeContext.Provider>
   );
