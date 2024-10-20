@@ -16,14 +16,14 @@ const ThemeToggleButton = () => {
       onClick={toggleTheme}
       className="absolute md:top-4 md:right-4 right-2 top-2 p-2 rounded-full transition-all duration-300 flex items-center justify-center"
       style={{
-        backgroundColor: mode === "light" ? "white" : "#111827",
-        color: mode === "light" ? "#fbbf24" : "#ffffff", 
+        backgroundColor: mode === "dark" ? "white" : "#111827",
+        color: mode === "dark" ? "#fbbf24" : "#ffffff", 
         width: "40px",
         height: "40px",
         zIndex: 1000
       }}
     >
-      {mode === "light" ? (
+      {mode === "dark" ? (
         <MdWbSunny className="h-6 w-6" />
       ) : (
         <MdDarkMode className="h-6 w-6" />
